@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambola Number Caller</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 2.5rem;
+    }
+
+    .current-number {
+      font-size: 5rem;
+      font-weight: bold;
+      margin: 30px 0;
+      background: #222;
+      padding: 20px;
+      border-radius: 15px;
+      display: inline-block;
+      min-width: 150px;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #fff;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ddd;
+    }
+
+    .called-numbers {
+      margin-top: 30px;
+      padding: 15px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .called-numbers span {
+      margin: 5px;
+      padding: 10px;
+      font-size: 1.2rem;
+      background: #fff;
+      color: #000;
+      border-radius: 6px;
+      min-width: 40px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tambola Number Caller</h1>
+
+  <div class="current-number" id="current-number">--</div>
+
+  <div>
+    <button onclick="callNumber()">Call Number</button>
+    <button onclick="resetGame()">Reset</button>
+  </div>
+
+  <h2>Called Numbers</h2>
+  <div class="called-numbers" id="called-numbers"></div>
+
+  <script>
+    let numbers = [];
+    let calledNumbers = [];
+
+    function callNumber() {
+      if (calledNumbers.length >= 90) {
+        alert("All numbers have been called!");
+        return;
+      }
+
+      let randomIndex = Math.floor(Math.random() * numbers.length);
+      let number = numbers.splice(randomIndex, 1)[0]; 
+
+      calledNumbers.push(number);
+
+      document.getElementById("current-number").textContent = number;
+      updateCalledNumbers();
+    }
+
+    function updateCalledNumbers() {
+      const container = document.getElementById("called-numbers");
+      container.innerHTML = "";
+      calledNumbers.forEach(num => {
+        let span = document.createElement("span");
+        span.textContent = num;
+        container.appendChild(span);
+      });
+    }
+
+    function resetGame() {
+      numbers = Array.from({length: 90}, (_, i) => i + 1); 
+      calledNumbers = [];
+      document.getElementById("current-number").textContent = "--";
+      document.getElementById("called-numbers").innerHTML = "";
+    }
+
+    // Initialize game on page load
+    resetGame();
+  </script>
+</body>
+    </html>
