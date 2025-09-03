@@ -4,82 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambola Number Caller</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-
-    h1 {
-      margin-top: 20px;
-      font-size: 2.5rem;
-    }
-
-    .current-number {
-      font-size: 5rem;
-      font-weight: bold;
-      margin: 30px 0;
-      background: #222;
-      padding: 20px;
-      border-radius: 15px;
-      display: inline-block;
-      min-width: 150px;
-    }
-
-    button {
-      font-size: 1.2rem;
-      padding: 12px 20px;
-      margin: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #fff;
-      color: #333;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #ddd;
-    }
-
-    .called-numbers {
-      margin-top: 30px;
-      padding: 15px;
-      background: rgba(0,0,0,0.3);
-      border-radius: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .called-numbers span {
-      margin: 5px;
-      padding: 10px;
-      font-size: 1.2rem;
-      background: #fff;
-      color: #000;
-      border-radius: 6px;
-      min-width: 40px;
-      display: inline-block;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-  <h1>Tambola Number Caller</h1>
+<body class="bg-gradient-to-br from-blue-500 to-blue-700 text-white min-h-screen flex flex-col items-center p-4">
 
-  <div class="current-number" id="current-number">--</div>
+  <h1 class="text-4xl font-bold mt-6 mb-4 flex items-center gap-3">
+    <i class="fa-solid fa-ticket"></i> Tambola Number Caller
+  </h1>
 
-  <div>
-    <button onclick="callNumber()">Call Number</button>
-    <button onclick="resetGame()">Reset</button>
+  <!-- Current Number -->
+  <div id="current-number" class="text-7xl font-extrabold bg-white text-blue-600 px-12 py-8 rounded-2xl shadow-lg mt-6 mb-6">
+    --
   </div>
 
-  <h2>Called Numbers</h2>
-  <div class="called-numbers" id="called-numbers"></div>
+  <!-- Buttons -->
+  <div class="flex gap-4 mb-8">
+    <button onclick="callNumber()" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-gray-100 transition flex items-center gap-2">
+      <i class="fa-solid fa-bullhorn"></i> Call Number
+    </button>
+    <button onclick="resetGame()" class="bg-red-500 text-white font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-red-600 transition flex items-center gap-2">
+      <i class="fa-solid fa-rotate-right"></i> Reset
+    </button>
+  </div>
+
+  <!-- Called Numbers -->
+  <h2 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+    <i class="fa-solid fa-list-ol"></i> Called Numbers
+  </h2>
+
+  <div id="called-numbers" class="grid grid-cols-9 gap-2 bg-white/10 p-4 rounded-2xl max-w-4xl w-full">
+    <!-- Numbers will appear here -->
+  </div>
 
   <script>
     let numbers = [];
@@ -106,6 +62,7 @@
       calledNumbers.forEach(num => {
         let span = document.createElement("span");
         span.textContent = num;
+        span.className = "bg-white text-blue-600 font-bold rounded-lg px-3 py-2 text-center shadow-md";
         container.appendChild(span);
       });
     }
@@ -117,8 +74,8 @@
       document.getElementById("called-numbers").innerHTML = "";
     }
 
-    // Initialize game on page load
+    // Initialize
     resetGame();
   </script>
 </body>
-    </html>
+</html>
